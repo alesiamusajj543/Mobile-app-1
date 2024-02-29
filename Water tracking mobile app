@@ -21,3 +21,51 @@ function App() {
 }
 
 export default App;
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+
+function HomeScreen({ navigation }) {
+  return (
+    <View>
+      <Text>Water Tracker</Text>
+      <Button
+        title="Add Water"
+        onPress={() => navigation.navigate('AddWater')}
+      />
+    </View>
+  );
+}
+
+export default HomeScreen;
+import React, { useState } from 'react';
+import { View, Text, Button } from 'react-native';
+
+function AddWaterScreen({ navigation }) {
+  const [amount, setAmount] = useState(0);
+
+  const addWater = (volume) => {
+    setAmount(amount + volume);
+  };
+
+  return (
+    <View>
+      <Text>Total Water: {amount} ml</Text>
+      <Button title="100 ml" onPress={() => addWater(100)} />
+      <Button title="200 ml" onPress={() => addWater(200)} />
+      <Button title="250 ml" onPress={() => addWater(250)} />
+      <Button title="500 ml" onPress={() => addWater(500)} />
+      <Button title="1 liter" onPress={() => addWater(1000)} />
+      <Button
+        title="Go Back"
+        onPress={() => {
+          navigation.navigate('Home', { totalWater: amount });
+        }}
+      />
+    </View>
+  );
+}
+
+export default AddWaterScreen;
+npx react-native run-android
+# or
+npx react-native run-ios
